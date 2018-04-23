@@ -1,0 +1,37 @@
+{
+  "name": "ftfnunes/oauth2-grantid",
+  "description": "GrantId OAuth 2.0 Client Provider for The PHP League OAuth2-Client",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Fernando Nunes",
+      "email": "ftfnunes@hotmail.com",
+      "homepage": "https://github.com/ftfnunes"
+    }
+  ],
+  "keywords": [
+    "oauth",
+    "oauth2",
+    "grantID",
+    "client",
+    "authorization",
+    "authorisation"
+  ],
+  "require": {
+    "php": ">=5.6.0",
+    "league/oauth2-client": "^2.2.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.7.21"
+  },
+  "autoload": {
+    "psr-4": {
+      "GrantId\\OAuth2\\Client\\Provider\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "GrantId\\OAuth2\\Client\\Test\\Provider\\": "tests/"
+    }
+  }
+}
