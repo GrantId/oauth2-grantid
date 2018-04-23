@@ -1,18 +1,18 @@
 {
-  "name": "ftfnunes/oauth2-grantid",
+  "name": "GrantId/oauth2-grantid",
   "description": "GrantId OAuth 2.0 Client Provider for The PHP League OAuth2-Client",
   "license": "MIT",
   "authors": [
     {
-      "name": "Fernando Nunes",
-      "email": "ftfnunes@hotmail.com",
-      "homepage": "https://github.com/ftfnunes"
+      "name": "Grant Software",
+      "email": "andrel@grantid.com",
+      "homepage": "https://github.com/GrantId"
     }
   ],
   "keywords": [
     "oauth",
     "oauth2",
-    "grantID",
+    "grantid",
     "client",
     "authorization",
     "authorisation"
