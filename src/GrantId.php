@@ -22,18 +22,27 @@ class GrantId extends AbstractProvider
     {
         return $this->authority . 'connect/authorize';
     }
+
     public function getBaseAccessTokenUrl(array $params = [])
     {
         return $this->authority . 'connect/token';
     }
+
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
         return $this->authority . 'connect/userinfo';
     }
+
     public function getDefaultScopes()
     {
         return $this->scopes;
     }
+
+    protected function getAccessTokenResourceOwnerId()
+    {
+        return 'sub';
+    }
+
     protected function checkResponse(ResponseInterface $response, $data)
     {
         if (!empty($data[$this->responseError])) {
