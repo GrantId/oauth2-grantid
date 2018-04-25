@@ -1,7 +1,7 @@
 # GrantId Provider for OAuth 2.0 Client
 
-[![Latest Version](grant-software/oauth2-grantid)
-[![Software License](https://github.com/grant-software/oauth2-grantid/blob/master/LICENSE)
+![Latest Version](https://packagist.org/packages/grant-software/oauth2-grantid)
+![Software License](https://github.com/grant-software/oauth2-grantid/blob/master/LICENSE)
 
 This package provides GrantId OAuth 2.0 support for the PHP League's [OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client), v2.0 and up.
 
