@@ -18,19 +18,28 @@ class GrantId extends AbstractProvider
     private $responseError = 'error';
     private $responseCode;
 
+    public function getSubscriptionUrl()
+    {
+        if (empty($this->authority)) {
+            throw new \RuntimeException('GrantId subscription url is not specified.');
+        }
+
+        return rtrim($this->authority, '/').'/';
+    }
+
     public function getBaseAuthorizationUrl()
     {
-        return $this->authority . 'connect/authorize';
+        return $this->getSubscriptionUrl() . 'connect/authorize';
     }
 
     public function getBaseAccessTokenUrl(array $params = [])
     {
-        return $this->authority . 'connect/token';
+        return $this->getSubscriptionUrl() . 'connect/token';
     }
 
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        return $this->authority . 'connect/userinfo';
+        return $this->getSubscriptionUrl() . 'connect/userinfo';
     }
 
     public function getDefaultScopes()
