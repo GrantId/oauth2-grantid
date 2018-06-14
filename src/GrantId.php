@@ -15,31 +15,34 @@ class GrantId extends AbstractProvider
 
     protected $authority;
     protected $scopes;
+    protected $postLogoutUri;
     private $responseError = 'error';
     private $responseCode;
 
-    public function getSubscriptionUrl()
-    {
+    private function getAuthority() {
         if (empty($this->authority)) {
-            throw new \RuntimeException('GrantId subscription url is not specified.');
+            throw new \RuntimeException('You need to specify the authority');
         }
 
-        return rtrim($this->authority, '/').'/';
+        return $this->authority;
     }
 
     public function getBaseAuthorizationUrl()
     {
-        return $this->getSubscriptionUrl() . 'connect/authorize';
+        return $this->getAuthority() . 'connect/authorize';
     }
-
     public function getBaseAccessTokenUrl(array $params = [])
     {
-        return $this->getSubscriptionUrl() . 'connect/token';
+        return $this->getAuthority() . 'connect/token';
     }
-
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        return $this->getSubscriptionUrl() . 'connect/userinfo';
+        return $this->getAuthority() . 'connect/userinfo';
+    }
+
+    public function getDiscoveryUrl()
+    {
+        return $this->getAuthority() . '.well-known/openid-configuration';
     }
 
     public function getDefaultScopes()
@@ -47,9 +50,12 @@ class GrantId extends AbstractProvider
         return $this->scopes;
     }
 
-    protected function getAccessTokenResourceOwnerId()
-    {
-        return 'sub';
+    private function getLogoutQuery($idToken) {
+        return '?id_token_hint=' . $idToken . '&post_logout_redirect_uri='.urlencode($this->postLogoutUri);
+    }
+
+    public function getLogoutUrl($idToken) {
+        return $this->getAuthority() . 'connect/endsession' . $this->getLogoutQuery($idToken);
     }
 
     protected function checkResponse(ResponseInterface $response, $data)
@@ -66,6 +72,17 @@ class GrantId extends AbstractProvider
             throw new IdentityProviderException($error, $code, $data);
         }
     }
+    protected function getAuthorizationParameters(array $options)
+    {
+        $params = parent::getAuthorizationParameters($options);
+
+        $params['response_type'] = 'code id_token';
+        $params['nonce'] = bin2hex(random_bytes(32 / 2));
+        $params['response_mode'] = 'form_post';
+
+        return $params;
+    }
+
     protected function createResourceOwner(array $response, AccessToken $token)
     {
         return new GrantIdResourceOwner($response);

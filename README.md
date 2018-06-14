@@ -17,7 +17,7 @@ composer require grant-software/oauth2-grantid
 
 Usage is the same as The League's OAuth 2.0 client, using `GrantId\OAuth2\Client\Provider\GrantId` as the provider.
 
-### Authorization Code Flow
+### Hybrid Flow
 
 This example retrieves an authorization code using user credentials in order to exchange for access tokens.
 
